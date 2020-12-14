@@ -5,7 +5,6 @@
 | nickname                | string     | null: false,                   |
 | email                   | string     | null: false, unique: true      |
 | encrypted_password      | string     | null: false,                   |
-| confirmation_password   | string     | null: false,                   |
 | first_name              | string     | null: false,                   |
 | last_name               | string     | null: false,                   |
 | first_name_kana         | string     | null: false,                   |
@@ -32,7 +31,7 @@
 
 ### Association
 - belongs_to :user
-- has_many: histories
+- has_one: history
 
 ## historiesテーブル
 
@@ -43,19 +42,22 @@
 
 ### Association
 - belongs_to :user
-- belongs_to :history
+- belongs_to :item
 - has_one :address
 
 ## addressテーブル
 
-| Column              | Type         | Options                   |
-| ------              | ----------   | --------------------------|
-| postal_code         | string       | null: false,              |
-| area_id             | integer      | null: false,              |
-| city_town           | string       | null: false,              |
-| house_number        | string       | null: false,              |
-| building_number     | string       |                           |
-| phone_number        | integer      | null: false,              |
+| Column              | Type         | Options                        |
+| ------              | ----------   | --------------------------     |
+| postal_code         | string       | null: false,                   |
+| area_id             | integer      | null: false,                   |
+| city_town           | string       | null: false,                   |
+| house_number        | string       | null: false,                   |
+| building_number     | string       |                                |
+| phone_number        | integer      | null: false,                   |
+| history             | references   | null: false, foreign_key: true |
+
+
 
 ### Association
 - belongs_to :history
