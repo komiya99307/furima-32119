@@ -1,10 +1,12 @@
 class HistoriesController < ApplicationController
   before_action :get_id, only:[:index, :create]
+  
+  
   def index
-
-    
-    
+    @purchase = Purshase.new
   end
+
+
   
   
   private
