@@ -14,11 +14,6 @@ RSpec.describe Purchase, type: :model do
         expect(@purchase).to be_valid
       end
 
-      it 'postal_codeにハイフンがあること' do
-        @purchase.postal_code = '123-4567'
-        expect(@purchase).to be_valid
-      end
-
       it 'bilding_numberが空でも購入できること' do
         @purchase.bilding_number = ''
         expect(@purchase).to be_valid
