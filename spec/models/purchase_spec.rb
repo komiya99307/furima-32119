@@ -2,10 +2,10 @@ require 'rails_helper'
 
 RSpec.describe Purchase, type: :model do
   before do
-    @user = FactoryBot.build(:user)
-    @item = FactoryBot.build(:item)
-
-    @purchase = FactoryBot.create(:purchase, user_id: @user.id ,item_id: @item.id)
+    @user = FactoryBot.create(:user)
+    @item = FactoryBot.create(:item)
+    # @item.image = fixture_file_upload('public/images/test-image.jpeg')
+    @purchase = FactoryBot.build(:purchase, user_id: @user.id ,item_id: @item.id)
   end
 
   describe '商品購入' do
@@ -33,10 +33,17 @@ RSpec.describe Purchase, type: :model do
         expect(@purchase.errors.full_messages).to include("Postal code is invalid")
       end
       
-      it 'area_idが空では登録できない' do
+      it 'area_idが0では登録できない' do
         @purchase.area_id = 0
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include('Area must be other than 0')
+      end
+
+      it 'area_idが空では登録できない' do
+        @purchase.area_id = nil
+        @purchase.valid?
+        binding.pry
+        expect(@purchase.errors.full_messages).to include("Area is not a number")
       end
 
       it 'city_townが空では登録できない' do

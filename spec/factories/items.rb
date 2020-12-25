@@ -8,6 +8,10 @@ FactoryBot.define do
     area_id           { 2 }
     shipping_date_id  { 2 }
     price             { 10000 }
+    after(:build) do |item|
+      item.image.attach(io: File.open('public/apple-touch-icon.png'), filename: 'apple-touch-icon.png')
+    end
+
     association :user  
   end
 end
