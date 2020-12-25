@@ -68,8 +68,14 @@ RSpec.describe Purchase, type: :model do
         expect(@purchase.errors.full_messages).to include("Phone number is invalid")
       end
 
-      it 'phone_numberが11桁以上だと登録できない' do
+      it 'phone_numberが12桁以上だと登録できない' do
         @purchase.phone_number = '111111111111'
+        @purchase.valid?
+        expect(@purchase.errors.full_messages).to include("Phone number is invalid")
+      end
+
+      it 'phone_numberは英数混合では登録できないこと' do
+        @purchase.phone_number = '111111aaaaa'
         @purchase.valid?
         expect(@purchase.errors.full_messages).to include("Phone number is invalid")
       end

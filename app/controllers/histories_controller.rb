@@ -2,7 +2,7 @@ class HistoriesController < ApplicationController
   before_action :get_id, only:[:index, :create]
   before_action :authenticate_user!, only: [:index]
   before_action :move_to_index, only: [:index]
-  
+ 
   def index
     @purchase = Purchase.new
   end
@@ -39,4 +39,5 @@ class HistoriesController < ApplicationController
       currency: 'jpy'
     )
   end
+
 end
