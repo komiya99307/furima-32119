@@ -10,14 +10,9 @@ class HistoriesController < ApplicationController
   def create
     @purchase = Purchase.new(purchase_params)
      if @purchase.valid?
-      Payjp.api_key = "sk_test_aa15eb916bf086383c281bfb"
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: purchase_params[:token],
-        currency: 'jpy'
-      )
+       pay_item 
        @purchase.save
-       return redirect_to root_path
+        redirect_to root_path
      else
       render 'index'
     end
@@ -34,5 +29,14 @@ class HistoriesController < ApplicationController
 
   def move_to_index
     redirect_to root_path if current_user == @item.user || @item.history.present?
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: purchase_params[:token],
+      currency: 'jpy'
+    )
   end
 end

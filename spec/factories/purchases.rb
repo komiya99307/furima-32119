@@ -6,6 +6,7 @@ FactoryBot.define do
     house_number           { 'aaaaaaa' }
     bilding_number         { 'aaaaaaa' }
     phone_number           { '11111111111'}
+    token                  {"tok_abcdefghijk00000000000000000"}
 
     association :user_id, factory: :user
     association :item_id, factory: :item
